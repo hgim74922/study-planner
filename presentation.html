@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduCompass - 해커톤 발표 슬라이드</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Feather Icons CDN -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+
+  <style>
+    * {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #0F172A;
+      color: #F8FAFC;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+    .slide {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      padding: 3rem 4.5rem;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeInSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .slide.active {
+      display: flex;
+    }
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .glass-box {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #818CF8 0%, #C084FC 50%, #38BDF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .speaker-note-panel {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body class="select-none">
+
+  <!-- 슬라이드 상단 네비게이션 & 프로그레스 바 -->
+  <div class="fixed top-0 left-0 right-0 z-50">
+    <div class="h-1.5 bg-slate-800 w-full">
+      <div id="progress-bar" class="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 transition-all duration-300 w-[11.1%]"></div>
+    </div>
+    <div class="flex items-center justify-between px-8 py-3 bg-slate-900/40 backdrop-blur-md border-b border-slate-800/80 text-xs text-slate-400">
+      <div class="flex items-center space-x-2 font-bold text-slate-200">
+        <i data-feather="compass" class="w-4 h-4 text-indigo-400"></i>
+        <span>EduCompass</span>
+        <span class="text-slate-500">|</span>
+        <span class="text-indigo-400 font-medium">해커톤 최종 발표</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span id="slide-counter" class="font-bold text-slate-300">01 / 09</span>
+        <div class="flex items-center space-x-1.5">
+          <button onclick="toggleNotes()" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors" title="발표 대본 토글 (단축키 N)">
+            대본 [N]
+          </button>
+          <button onclick="toggleFullscreen()" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors" title="전체화면 토글 (단축키 F)">
+            전체화면 [F]
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 슬라이드 컨테이너 -->
+  <main class="w-full h-full pt-12 pb-16">
+
+    <!-- SLIDE 1: 표지 -->
+    <section class="slide active" data-index="1" data-note="안녕하십니까. 2022 개정 5등급제와 주요 11개 대학 실전 입결을 기반으로 수험생 개개인에게 가장 정확한 학습 방향을 제시하는 AI 학습 나침반, EduCompass 발표를 시작하겠습니다.">
+      <div class="flex items-center justify-between">
+        <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+          2026 에듀테크 해커톤 프로젝트
+        </span>
+        <span class="text-xs text-slate-400">발표자: EduCompass 팀</span>
+      </div>
+
+      <div class="my-auto max-w-4xl space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-cyan-300 font-semibold">
+          <i data-feather="zap" class="w-3.5 h-3.5"></i> 2022 개정 5등급제 환산 • 7가지 공부 성향 • 11개 대학 실전 입결
+        </div>
+        <h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-tight">
+          수험생을 위한 초개인화 AI 학습 나침반,<br />
+          <span class="gradient-text">EduCompass</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl">
+          혼란스러운 2022 개정 교육과정과 깜깜이 입결 속에서,<br />
+          <strong>‘내 성적과 성향’</strong>에 딱 맞춘 가장 빠르고 확실한 <strong>합격 공부 방향</strong>을 처방합니다.
+        </p>
+      </div>
+
+      <div class="flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80 pt-4">
+        <span>키보드 좌우 방향키 [← / →] 또는 스페이스바로 이동할 수 있습니다.</span>
+        <span class="text-indigo-400 font-semibold">Live Web App: http://localhost:8080</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: 문제 제기 -->
+    <section class="slide" data-index="2" data-note="학생들이 열심히 공부하는데도 성적이 오르지 않는 이유는 3가지입니다. 첫째, 2022 개정 5등급제 전환에 따른 혼란. 둘째, 내 성적과 목표 대학 입결 사이의 구체적 갭을 모르는 깜깜이 입시. 셋째, 자신의 뇌 작동 방식과 맞지 않는 잘못된 공부법을 고수하기 때문입니다.">
+      <div>
+        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Problem Statement</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+          "매일 10시간씩 공부하는데, 왜 성적이 제자리일까요?"
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
+        <div class="glass-box rounded-2xl p-6 border-l-4 border-l-rose-500 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold">01</div>
+          <h3 class="text-lg font-bold text-white">2022 개정 5등급제 혼란</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            고1·고2는 5등급제(1등급 10%), 고3은 9등급제(1등급 4%)로 이원화되어 내신 산출 기준이 완전히 달라졌고, 선택과목은 학생 수 차이로 등급 왜곡이 심각합니다.
+          </p>
+        </div>
+
+        <div class="glass-box rounded-2xl p-6 border-l-4 border-l-amber-500 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">02</div>
+          <h3 class="text-lg font-bold text-white">목표 대학 입결의 깜깜이화</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            대학별 수시 교과 70% 컷, 학종 컷, 수능 최저기준이 천차만별이지만, 학생들은 자신의 현재 성적으로 어느 과목을 몇 등 올려야 합격선에 드는지 알지 못합니다.
+          </p>
+        </div>
+
+        <div class="glass-box rounded-2xl p-6 border-l-4 border-l-cyan-500 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">03</div>
+          <h3 class="text-lg font-bold text-white">공부 성향 무시한 획일적 학습</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            개념을 파고들어야 하는 학생이 무작정 양치기 문제를 풀거나, 암기형 학생이 무작정 인강만 듣는 등 뇌의 인지 메타인지와 불일치하는 공부로 시간을 낭비합니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex justify-between">
+        <span>EduCompass는 이 3대 난제를 한 번에 해결하는 올인원 솔루션입니다.</span>
+        <span class="text-rose-400 font-semibold">대한민국 수험생의 78%가 학습 방향 상실 경험</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: 솔루션 개요 -->
+    <section class="slide" data-index="3" data-note="EduCompass는 단 1분간의 9단계 심층 진단을 통해, 학생의 교육과정 등급 환산, 11개 대학 실전 입결 갭 분석, 그리고 7가지 공부 성향 처방을 융합하여 1:1 맞춤형 로드맵을 즉시 도출합니다.">
+      <div>
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Our Solution</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+          EduCompass: 9단계 진단 기반 초개인화 학습 처방 엔진
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto">
+        <div class="glass-box rounded-2xl p-5 border border-indigo-500/30 space-y-2">
+          <div class="p-2.5 w-fit rounded-lg bg-indigo-500/20 text-indigo-300 mb-2">
+            <i data-feather="check-square" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">1. 9단계 정밀 진단</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            학년, 목표 대학/학과, 전교생 수, 과목별 현재/목표 석차, 시험 D-Day, 핵심 병목, 7가지 공부 성향까지 원스톱 수집.
+          </p>
+        </div>
+
+        <div class="glass-box rounded-2xl p-5 border border-cyan-500/30 space-y-2">
+          <div class="p-2.5 w-fit rounded-lg bg-cyan-500/20 text-cyan-300 mb-2">
+            <i data-feather="sliders" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">2. 개정 교육과정 연동</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            고1 전과목 공통 처리, 고1·고2 5등급제(10%) & 고3 9등급제(4%) 이원화, 2·3학년 선택과목 등급 제외 및 석차 관리.
+          </p>
+        </div>
+
+        <div class="glass-box rounded-2xl p-5 border border-purple-500/30 space-y-2">
+          <div class="p-2.5 w-fit rounded-lg bg-purple-500/20 text-purple-300 mb-2">
+            <i data-feather="database" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">3. 11개 대학 실전 입결</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            고려대, 연세대, 성균관대 등 전년도 70% 컷(교과/학종/정시) 및 수능 최저기준을 대조하여 과목별 도약 갭 산출.
+          </p>
+        </div>
+
+        <div class="glass-box rounded-2xl p-5 border border-emerald-500/30 space-y-2">
+          <div class="p-2.5 w-fit rounded-lg bg-emerald-500/20 text-emerald-300 mb-2">
+            <i data-feather="zap" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">4. 성향별 액션 로드맵</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            7가지 인지 성향별 치명적 함정(Trap) 극복법, 인풋/아웃풋 3:7 밸런스, 오늘 바로 실천할 5대 체크리스트 제공.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex justify-between">
+        <span>웹 브라우저에서 100% 독립 실행되는 제로-의존성 경량 아키텍처</span>
+        <span class="text-emerald-400 font-semibold">진단부터 처방까지 단 60초 소요</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: 기술 특장점 1 - 2022 개정 5등급제 & 선택과목 분리 -->
+    <section class="slide" data-index="4" data-note="첫 번째 핵심 기술은 2022 개정 교육과정 정밀 반영입니다. 1학년은 모든 과목이 공통과목이므로 5개 전 과목 등급을 산출하며, 현재 1-2학년은 5등급제, 3학년은 9등급제를 자동 연동합니다. 또한 2-3학년 선택과목은 학생 수 차이로 등급을 제외하고 등수 중심으로 관리합니다.">
+      <div>
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Core Feature 01</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+          2022 개정 5등급제 환산 & 선택과목 석차 관리 알고리즘
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+        <div class="glass-box rounded-2xl p-6 border border-indigo-500/30 space-y-4">
+          <div class="flex items-center space-x-2 text-indigo-400 font-bold text-base">
+            <i data-feather="layers" class="w-5 h-5"></i>
+            <span>학년별 교육과정 등급제 완벽 이원화</span>
+          </div>
+          <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+            <div class="p-3 bg-slate-800/70 rounded-xl border border-slate-700">
+              <strong class="text-white block mb-1">고1 & 고2: 2022 개정 5등급제</strong>
+              <p class="text-slate-400">1등급(상위 10%) | 2등급(34%) | 3등급(66%) | 4등급(90%) | 5등급(100%)</p>
+            </div>
+            <div class="p-3 bg-slate-800/70 rounded-xl border border-slate-700">
+              <strong class="text-white block mb-1">고3 & N수생: 2015 개정 9등급제</strong>
+              <p class="text-slate-400">1등급(4%) | 2등급(11%) | 3등급(23%) | 4등급(40%) | 5등급(60%) ...</p>
+            </div>
+            <p class="text-indigo-300 font-medium">※ 학습자가 원하면 1단계 및 3단계에서 언제든 원클릭 전환 가능</p>
+          </div>
+        </div>
+
+        <div class="glass-box rounded-2xl p-6 border border-cyan-500/30 space-y-4">
+          <div class="flex items-center space-x-2 text-cyan-400 font-bold text-base">
+            <i data-feather="check-circle" class="w-5 h-5"></i>
+            <span>1학년 전과목 공통화 vs 2·3학년 선택과목 분리</span>
+          </div>
+          <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+            <div class="p-3 bg-slate-800/70 rounded-xl border border-slate-700">
+              <strong class="text-white block mb-1">1학년: 5개 전 과목 공통과목</strong>
+              <p class="text-slate-400">국어·영어·수학·통합과학·통합사회 모두 전교생이 동일 이수하므로 전 과목 등급 뱃지 산출.</p>
+            </div>
+            <div class="p-3 bg-slate-800/70 rounded-xl border border-slate-700">
+              <strong class="text-white block mb-1">2·3학년: 선택과목 등급 제외 원칙</strong>
+              <p class="text-slate-400">과목마다 수강생 수가 천차만별(20명 vs 200명)이므로 전교생 기준 등급은 제외하고 '석차(등수)'로 정밀 관리.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex justify-between">
+        <span>모의고사는 모든 학년 동일하게 전국 표준 9등급제(1~9등급)로 일관 분석됩니다.</span>
+        <span class="text-cyan-400 font-semibold">입시 현실을 100% 반영한 고도화된 성적 체계</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: 기술 특장점 2 - 11개 주요 대학 실전 입결 분석 -->
+    <section class="slide" data-index="5" data-note="두 번째 핵심은 해커톤 입결정보 텍스트 문서에 수록된 11개 주요 대학의 전년도 실전 70% 컷을 내장하여, 학습자가 목표 대학을 선택하면 수시 교과, 학종, 정시 백분위 컷과 수능 최저 기준을 즉시 대조해 맞춤형 전략을 도출한다는 점입니다.">
+      <div>
+        <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Core Feature 02</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+          11개 주요 대학 실전 입결 융합 & 합격선 갭 분석
+        </h2>
+      </div>
+
+      <div class="my-auto space-y-4">
+        <!-- 11개 대학 뱃지 띠 -->
+        <div class="flex flex-wrap gap-2 justify-center py-2">
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">고려대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">연세대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">서강대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">성균관대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">중앙대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">경희대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">한국외대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">서울시립대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">이화여대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">광운대</span>
+          <span class="px-3 py-1 rounded-lg bg-indigo-600/40 border border-indigo-500/50 text-indigo-200 text-xs font-bold">단국대</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="glass-box rounded-2xl p-5 border border-slate-700 space-y-2">
+            <span class="text-xs font-bold text-blue-400 block">수시 학생부교과 전형</span>
+            <h4 class="font-bold text-white text-base">최종등록자 70% 컷 & 수능최저</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              5등급제/9등급제 맞춤 환산 합격선 제시. 수능 최저학력기준(예: 3합 7, 2합 5 등) 충족 여부를 실시간 시뮬레이션.
+            </p>
+          </div>
+
+          <div class="glass-box rounded-2xl p-5 border border-slate-700 space-y-2">
+            <span class="text-xs font-bold text-teal-400 block">수시 학생부종합 전형</span>
+            <h4 class="font-bold text-white text-base">70% 컷 & 서류/면접 평가 포인트</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              대학별 인재상, 전공 관련 교과 이수 노력, 세특 기록의 깊이와 제시문 기반 면접 대비 포인트를 맞춤 안내.
+            </p>
+          </div>
+
+          <div class="glass-box rounded-2xl p-5 border border-slate-700 space-y-2">
+            <span class="text-xs font-bold text-purple-400 block">정시 수능 일반 전형</span>
+            <h4 class="font-bold text-white text-base">국수탐 백분위 70% 컷 & 영역별 가중치</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              대학별 수학/탐구 가중치(서강대 수학 가중치, 외대 영어 반영비 등)를 고려한 최우선 점수 획득 과목 제시.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex justify-between">
+        <span>"목표 대학 합격을 위해 지금 어떤 과목을 몇 등 올려야 하는가?"에 대한 명쾌한 답을 줍니다.</span>
+        <span class="text-purple-400 font-semibold">대교협 공시 및 실전 입시 데이터 탑재</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: 기술 특장점 3 - 7가지 공부 성향 & 시험 4주/3주/2주/1주전 긴급 로드맵 -->
+    <section class="slide" data-index="6" data-note="세 번째 핵심은 7가지 공부 성향 분석과 주차별 정밀 행동 로드맵입니다. 특히 '시험 1주일 전인데 공부가 하나도 안 되어 있지만 머리는 좋다'는 학생에게는 교과서 정독을 즉시 금지하고, 기출 답지부터 먼저 읽어 핵심 3개 단원만 뚫는 족보 역설계 벼락치기 전술을 맞춤 처방합니다.">
+      <div>
+        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Core Feature 03</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+          7가지 공부 성향 & 시험 4주/3주/2주/1주 전 맞춤 긴급 처방
+        </h2>
+      </div>
+
+      <div class="my-auto space-y-4">
+        <!-- 상단: 4주~1주 주차별 전략 띠 -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+          <div class="p-3 rounded-xl bg-slate-800/90 border border-slate-700">
+            <span class="text-indigo-400 font-bold block">4주 전 (D-28)</span>
+            <strong class="text-white block mt-0.5">개념 뼈대 & 목차 백지화</strong>
+            <span class="text-[11px] text-slate-400">교과서 정독 & 기본 예제 100%</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-800/90 border border-slate-700">
+            <span class="text-indigo-400 font-bold block">3주 전 (D-21)</span>
+            <strong class="text-white block mt-0.5">유형서 마스터 & 부교재 변형</strong>
+            <span class="text-[11px] text-slate-400">대표 유형 2회독 & 출제 포인트</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-800/90 border border-slate-700">
+            <span class="text-indigo-400 font-bold block">2주 전 (D-14)</span>
+            <strong class="text-white block mt-0.5">학교 3개년 기출 역설계</strong>
+            <span class="text-[11px] text-slate-400">서술형 채점표 & 키워드 암기</span>
+          </div>
+          <div class="p-3 rounded-xl bg-rose-950/60 border border-rose-500/40">
+            <span class="text-rose-400 font-bold block">1주 전 (D-7 파이널)</span>
+            <strong class="text-white block mt-0.5">오답 3회독 & 타임어택</strong>
+            <span class="text-[11px] text-rose-300">새 문제 금지, 치트시트 단권화</span>
+          </div>
+        </div>
+
+        <!-- 하단: 상황별 긴급 처방 하이라이트 -->
+        <div class="p-4 rounded-2xl bg-gradient-to-r from-rose-950/40 via-slate-800/60 to-indigo-950/40 border border-rose-500/30 space-y-2">
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-rose-600 text-white">현장 적응형 AI 로직</span>
+            <h4 class="text-sm font-bold text-white">"시험 1주일 전인데 공부는 안 되어 있고 머리는 좋은 학생이라면?"</h4>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            👉 <strong>처방:</strong> 교과서 1페이지부터 읽기 절대 금지! 빠른 이해력을 무기로 <strong>[최근 3개년 기출 답지 먼저 읽기 → 배점 1순위 핵심 3단원 공식 유도 → 준킬러 타임어택]</strong>의 족보 역설계 전술을 가동하여 3등급 이상을 확실히 방어합니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex justify-between">
+        <span>남은 기간(D-Day)과 현재 준비 완성도(10%~90%)에 따라 완전히 다른 일일 행동 플랜을 제시합니다.</span>
+        <span class="text-amber-400 font-semibold">초밀착 상황별 벼락치기 프로토콜</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: 제품 시연 및 사용자 화면 -->
+    <section class="slide" data-index="7" data-note="실제 동작하는 웹앱의 인터페이스입니다. 부드러운 9단계 위저드 UI, 고1 전과목 공통 및 고2-3 선택과목 분리, Chart.js 기반 과목별 도약 바 차트, 그리고 오늘 당장 실천할 수 있는 5대 체크리스트와 PDF 인쇄를 완벽 지원합니다.">
+      <div>
+        <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">Product Demonstration</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+          실제 구동 인터페이스 & 인터랙티브 리포트
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto items-center">
+        <!-- 왼쪽: 설문 화면 안내 -->
+        <div class="glass-box rounded-2xl p-6 border border-slate-700 space-y-3">
+          <div class="flex items-center space-x-2 text-indigo-400 font-bold text-base">
+            <i data-feather="layout" class="w-5 h-5"></i>
+            <span>직관적인 9단계 위저드 설문</span>
+          </div>
+          <ul class="text-xs sm:text-sm text-slate-300 space-y-2">
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-400 font-bold">•</span>
+              <span><strong>빠른 데모 프리셋:</strong> 상단 [고1 내신], [고2 병행], [고3 수능] 1초 원클릭 체험</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-400 font-bold">•</span>
+              <span><strong>교육과정 토글:</strong> 2022 개정 5등급제 ↔ 2015 개정 9등급제 실시간 스위칭</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-400 font-bold">•</span>
+              <span><strong>과목별 인원수 대응:</strong> 공통과목 등급 계산 + 선택과목 등수(석차) 관리 분리</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-indigo-400 font-bold">•</span>
+              <span><strong>자동 저장:</strong> 브라우저 LocalStorage 탑재로 새로고침 시에도 데이터 유지</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 오른쪽: 리포트 화면 안내 -->
+        <div class="glass-box rounded-2xl p-6 border border-slate-700 space-y-3">
+          <div class="flex items-center space-x-2 text-emerald-400 font-bold text-base">
+            <i data-feather="file-text" class="w-5 h-5"></i>
+            <span>종합 맞춤 분석 리포트 기능</span>
+          </div>
+          <ul class="text-xs sm:text-sm text-slate-300 space-y-2">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">•</span>
+              <span><strong>대학 실전 입결 카드:</strong> 11개 주요 대학 수시/정시 70% 컷 & 수능최저 진단</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">•</span>
+              <span><strong>시각화 차트:</strong> Chart.js 기반 과목별 현재 vs 목표 도약 석차 바 차트</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">•</span>
+              <span><strong>D-Day 타임라인:</strong> 남은 기간(1주~2개월)에 따른 단계별 실전 액션 플랜</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">•</span>
+              <span><strong>리포트 출력:</strong> 브라우저 인쇄 친화 CSS를 통한 즉시 A4 PDF 저장 지원</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex justify-between">
+        <span>로컬 파이썬 서버(`python server.py`) 또는 `index.html` 더블클릭으로 즉시 구동 가능합니다.</span>
+        <span class="text-cyan-400 font-semibold">100% 동작 검증 완료 (HTTP 200 OK)</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: 비즈니스 가치 및 확장 로드맵 -->
+    <section class="slide" data-index="8" data-note="EduCompass는 학생들에게는 사교육비 절감과 자기주도학습 성공 경험을, 학교와 학부모에게는 2022 개편안의 명쾌한 나침반이 됩니다. 향후 전국 200개 대학 입결 확장과 AI 학생부 세특 생성 모델로 진화할 예정입니다.">
+      <div>
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Impact & Scalability</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+          기대 효과 및 미래 발전 로드맵
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+        <div class="glass-box rounded-2xl p-6 border border-slate-700 space-y-3">
+          <div class="p-2.5 w-fit rounded-lg bg-indigo-500/20 text-indigo-300 font-bold">학생 관점</div>
+          <h4 class="text-lg font-bold text-white">사교육비 절감 & 순공 효율 극대화</h4>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            비싼 컨설팅 없이도 내 성적과 성향에 맞는 최적의 자습 루틴을 찾고, 막연한 불안감 대신 확실한 일일 행동 목표 획득.
+          </p>
+        </div>
+
+        <div class="glass-box rounded-2xl p-6 border border-slate-700 space-y-3">
+          <div class="p-2.5 w-fit rounded-lg bg-teal-500/20 text-teal-300 font-bold">공교육 & 학부모 관점</div>
+          <h4 class="text-lg font-bold text-white">2022 개편안 혼선 종식</h4>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            5등급제 내신 환산과 선택과목 유불리를 객관적 지표로 시각화하여 교사 진학 상담 및 학부모 지도 지원.
+          </p>
+        </div>
+
+        <div class="glass-box rounded-2xl p-6 border border-slate-700 space-y-3">
+          <div class="p-2.5 w-fit rounded-lg bg-purple-500/20 text-purple-300 font-bold">향후 로드맵</div>
+          <h4 class="text-lg font-bold text-white">전국 200개 대학 & AI 세특 연계</h4>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            전국 4년제 대학 입결 데이터 전면 확장, 생성형 AI 기반 학과별 세특 탐구 주제 추천, 실시간 스터디 타이머 앱 연동.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex justify-between">
+        <span>단순한 설문 도구를 넘어, 에듀테크 AI 입시 컨설팅 솔루션으로의 무한한 확장성을 갖습니다.</span>
+        <span class="text-indigo-400 font-semibold">데이터 기반 에듀테크 플랫폼</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: 엔딩 및 Q&A -->
+    <section class="slide" data-index="9" data-note="EduCompass는 길을 잃은 모든 학생들에게 가장 따뜻하고 정확한 학습 나침반이 될 것입니다. 경청해 주셔서 대단히 감사합니다. 지금부터 질문을 받겠습니다.">
+      <div class="flex items-center justify-between">
+        <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+          Q&A 및 현장 시연
+        </span>
+        <span class="text-xs text-slate-400">EduCompass Team</span>
+      </div>
+
+      <div class="my-auto text-center space-y-6 max-w-2xl mx-auto">
+        <div class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white mx-auto shadow-xl shadow-indigo-500/20">
+          <i data-feather="compass" class="w-8 h-8"></i>
+        </div>
+        <h2 class="text-4xl sm:text-5xl font-black text-white tracking-tight">
+          "배움의 방향을 밝히는<br /><span class="gradient-text">가장 정확한 나침반</span>"
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          <strong>EduCompass</strong>는 2022 개정 교육과정의 혼선 속에서도<br />
+          모든 수험생이 자신만의 속도와 방식으로 꿈꾸는 대학에 도달할 수 있도록 돕겠습니다.
+        </p>
+
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="http://localhost:8080" target="_blank" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+            <i data-feather="external-link" class="w-4 h-4"></i>
+            <span>웹앱 라이브 시연 바로가기</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex justify-between">
+        <span>경청해 주셔서 감사합니다. 질문 및 피드백을 부탁드립니다.</span>
+        <span class="text-indigo-400 font-semibold">Thank You!</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 하단 컨트롤 바 -->
+  <footer class="fixed bottom-0 left-0 right-0 z-50 px-8 py-3 bg-slate-900/60 backdrop-blur-md border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+    <div class="flex items-center space-x-2">
+      <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">←</kbd>
+      <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">→</kbd>
+      <span>슬라이드 이동</span>
+      <span class="text-slate-600">|</span>
+      <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">Space</kbd>
+      <span>다음</span>
+    </div>
+
+    <!-- 발표 대본 미니 패널 (기본 숨김, N 누르면 토글) -->
+    <div id="speaker-note-box" class="hidden absolute bottom-14 left-8 right-8 p-4 rounded-xl bg-slate-800/95 border border-indigo-500/40 text-slate-200 shadow-2xl backdrop-blur-lg">
+      <div class="flex items-center justify-between text-[11px] font-bold text-indigo-400 mb-1">
+        <span>🎙️ 발표자 스피치 큐카드 (대본)</span>
+        <span class="text-slate-400">[N 키로 닫기]</span>
+      </div>
+      <p id="speaker-note-text" class="text-xs sm:text-sm leading-relaxed font-medium text-slate-100">
+        대본 내용
+      </p>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <button onclick="prevSlide()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+        <i data-feather="chevron-left" class="w-4 h-4"></i>
+      </button>
+      <button onclick="nextSlide()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+        <i data-feather="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 9;
+
+    function updateSlide() {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const activeSlide = document.querySelector(`.slide[data-index="${currentSlide}"]`);
+      if (activeSlide) {
+        activeSlide.classList.add('active');
+        const note = activeSlide.dataset.note || '';
+        document.getElementById('speaker-note-text').textContent = note;
+      }
+
+      document.getElementById('slide-counter').textContent = `${String(currentSlide).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
+      const pct = (currentSlide / totalSlides) * 100;
+      document.getElementById('progress-bar').style.width = `${pct}%`;
+      if (window.feather) feather.replace();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleNotes() {
+      const box = document.getElementById('speaker-note-box');
+      box.classList.toggle('hidden');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    // 키보드 조작 이벤트
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateSlide();
+      if (window.feather) feather.replace();
+    });
+  </script>
+</body>
+</html>

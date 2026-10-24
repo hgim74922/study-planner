@@ -1,0 +1,240 @@
+/* styles.css - 맞춤형 학습 솔루션 스타일 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --primary: #4F46E5;
+  --primary-light: #EEF2FF;
+  --primary-dark: #3730A3;
+  --accent: #06B6D4;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 50%, #F0FDFA 100%);
+}
+
+* {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  color: #1E293B;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+}
+
+.glass-card-hover {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Selection Cards (Radio / Checkbox style) */
+.selectable-card {
+  cursor: pointer;
+  border: 2px solid #E2E8F0;
+  border-radius: 1rem;
+  padding: 1.1rem 1.25rem;
+  background: #FFFFFF;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  user-select: none;
+}
+
+.selectable-card:hover {
+  border-color: #A5B4FC;
+  background-color: #F8FAFC;
+  transform: translateY(-1px);
+}
+
+.selectable-card.selected {
+  border-color: #4F46E5;
+  background-color: #EEF2FF;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.15);
+}
+
+.selectable-card.selected .check-circle {
+  border-color: #4F46E5;
+  background-color: #4F46E5;
+  color: white;
+}
+
+.selectable-card.selected .check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.check-icon {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.15s ease-in-out;
+}
+
+/* Progress Bar Glowing Effect */
+.progress-glow {
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(79, 70, 229, 0.45);
+  }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.5s infinite;
+}
+
+/* 내신 등급 뱃지 (2022 개정 5등급제 & 2015 개정 9등급제 공용) */
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: -0.02em;
+}
+.grade-1 { background-color: #EFF6FF; color: #1D4ED8; border: 1px solid #93C5FD; }
+.grade-2 { background-color: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+.grade-3 { background-color: #F0FDF4; color: #15803D; border: 1px solid #BBF7D0; }
+.grade-4 { background-color: #FEFCE8; color: #A16207; border: 1px solid #FDE047; }
+.grade-5 { background-color: #FFF7ED; color: #C2410C; border: 1px solid #FDBA74; }
+.grade-6 { background-color: #FEF2F2; color: #B91C1C; border: 1px solid #FCA5A5; }
+.grade-7 { background-color: #FFF1F2; color: #BE123C; border: 1px solid #FDA4AF; }
+.grade-8 { background-color: #F8FAFC; color: #475569; border: 1px solid #CBD5E1; }
+.grade-9 { background-color: #F1F5F9; color: #64748B; border: 1px solid #94A3B8; }
+.grade-other { background-color: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
+
+/* 공통과목 / 선택과목 뱃지 */
+.subject-type-common {
+  background-color: #EEF2FF;
+  color: #4F46E5;
+  border: 1px solid #C7D2FE;
+}
+.subject-type-elective {
+  background-color: #F8FAFC;
+  color: #64748B;
+  border: 1px solid #E2E8F0;
+}
+
+/* 주차별 타임라인 탭 스타일 */
+.timeline-tab {
+  cursor: pointer;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.875rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1.5px solid #E2E8F0;
+  background-color: #FFFFFF;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+.timeline-tab:hover {
+  background-color: #F8FAFC;
+  border-color: #A5B4FC;
+  color: #1E293B;
+}
+.timeline-tab.active {
+  background-color: #4F46E5;
+  border-color: #4F46E5;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+}
+.timeline-tab.current-period {
+  position: relative;
+}
+.timeline-tab.current-period::after {
+  content: '현재 D-Day';
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  background-color: #EF4444;
+  color: white;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35);
+}
+
+/* 긴급 처방 카드 글로우 */
+.urgent-glow {
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.15), 0 8px 20px -5px rgba(245, 158, 11, 0.1);
+  border: 1.5px solid #FCA5A5;
+}
+
+/* Print Stylesheet for Report PDF/A4 */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .glass-card {
+    box-shadow: none !important;
+    border: 1px solid #CCCCCC !important;
+    backdrop-filter: none !important;
+    background: #FFFFFF !important;
+    page-break-inside: avoid;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+}

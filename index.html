@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduCompass - 초개인화 맞춤형 학습 방향 솔루션</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Feather Icons CDN -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#6366F1',
+              600: '#4F46E5',
+              700: '#4338CA',
+              800: '#3730A3',
+              900: '#312E81'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- 상단 네비게이션 헤더 -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80 transition-all no-print">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="location.reload()">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white shadow-md shadow-indigo-200">
+          <i data-feather="compass" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-lg font-black tracking-tight text-slate-900 flex items-center gap-1.5">
+            EduCompass <span class="text-xs px-2 py-0.5 rounded-full font-bold bg-indigo-100 text-indigo-700">AI 학습 나침반</span>
+          </span>
+          <p class="text-xs text-slate-500 hidden sm:block">맞춤형 학습 진단 & 1:1 도약 로드맵 솔루션</p>
+        </div>
+      </div>
+
+      <!-- 빠른 체험용 데모 프리셋 버튼 -->
+      <div class="flex items-center space-x-1.5 sm:space-x-2 text-xs">
+        <span class="text-slate-400 font-medium hidden md:inline-flex items-center gap-1">
+          <i data-feather="zap" class="w-3.5 h-3.5 text-amber-500"></i> 빠른 체험:
+        </span>
+        <button type="button" data-type="high1" class="demo-btn px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold border border-indigo-200/80 transition-colors">
+          고1 (전과목공통•5등급제)
+        </button>
+        <button type="button" data-type="high2" class="demo-btn px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold border border-indigo-200/80 transition-colors">
+          고2 (5등급제•선택분리)
+        </button>
+        <button type="button" data-type="high3" class="demo-btn px-2.5 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold border border-indigo-200/80 transition-colors">
+          고3 (2015개정•9등급제)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 컨테이너 -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+
+    <!-- 1. 진단 설문 위저드 화면 -->
+    <section id="survey-container" class="space-y-6">
+      
+      <!-- 상단 인트로 배너 -->
+      <div class="text-center space-y-2 mb-8">
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100">
+          <i data-feather="check-circle" class="w-3.5 h-3.5"></i> 9단계 정밀 진단 • 1·2학년 5등급제 / 3학년 9등급제 지원 • 11개 대학 실전 입결
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          나에게 딱 맞는 학습 방향과 합격 로드맵을 찾아보세요
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
+          고1 전과목 공통 내신 산출, 고2·고3 선택과목 석차 관리, 2022 개정 5등급제(1·2학년) 및 2015 개정 9등급제(3학년), 전국 9등급제 모의고사와 목표 대학 전년도 실전 입결을 융합 분석합니다.
+        </p>
+      </div>
+
+      <!-- 설문 카드 -->
+      <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl relative overflow-hidden">
+        
+        <!-- 프로그레스 바 상단 -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-2">
+            <span id="step-number-badge" class="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-md font-semibold">
+              단계 1 / 9
+            </span>
+            <span class="text-indigo-600 flex items-center gap-1">
+              <i data-feather="clock" class="w-3 h-3"></i> 소요 시간: 약 1분
+            </span>
+          </div>
+          <!-- 진행도 게이지 -->
+          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-fill" class="bg-gradient-to-r from-indigo-500 to-indigo-600 h-full w-[11.1%] transition-all duration-300 rounded-full progress-glow"></div>
+          </div>
+        </div>
+
+        <!-- 질문 타이틀 영역 -->
+        <div class="mb-6 space-y-1">
+          <h3 id="step-title" class="text-xl sm:text-2xl font-bold text-slate-900">
+            현재 나이(학년)를 선택해주세요
+          </h3>
+          <p id="step-description" class="text-xs sm:text-sm text-slate-500">
+            학년별 교육과정과 수시/정시 입시 흐름에 맞춤형 가이드가 제공됩니다.
+          </p>
+        </div>
+
+        <!-- 동적 설문 본문 (JS로 렌더링) -->
+        <div id="step-content" class="min-h-[280px]">
+          <!-- app.js renderCurrentStep() -->
+        </div>
+
+        <!-- 하단 네비게이션 버튼 -->
+        <div class="flex items-center justify-between pt-8 mt-8 border-t border-slate-100">
+          <button id="btn-prev" type="button" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 font-bold text-sm flex items-center space-x-1.5 transition-all">
+            <i data-feather="arrow-left" class="w-4 h-4"></i>
+            <span>이전</span>
+          </button>
+
+          <button id="btn-next" type="button" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm flex items-center space-x-1.5 shadow-md shadow-indigo-200 transition-all">
+            <span>다음 단계</span>
+            <i data-feather="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- 설문 안내 배너 -->
+      <div class="text-center text-xs text-slate-400">
+        입력하신 모든 정보는 브라우저 내부에서만 안전하게 분석되며 외부에 전송되지 않습니다.
+      </div>
+    </section>
+
+    <!-- 2. 맞춤형 분석 리포트 화면 (초기 hidden) -->
+    <section id="report-container" class="hidden">
+      <!-- app.js generatePersonalizedReport() 에서 동적 렌더링 -->
+    </section>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="mt-16 py-8 border-t border-slate-200/80 bg-white/50 text-center text-xs text-slate-500 no-print">
+    <div class="max-w-4xl mx-auto px-4 space-y-2">
+      <div class="flex items-center justify-center space-x-2 font-bold text-slate-700">
+        <i data-feather="compass" class="w-4 h-4 text-indigo-600"></i>
+        <span>EduCompass - 맞춤형 학습 방향 솔루션</span>
+      </div>
+      <p class="text-slate-400">
+        수시/정시 등급 환산 & 과목별 취약점 진단 & D-Day 맞춤형 학습 로드맵 알고리즘 탑재
+      </p>
+    </div>
+  </footer>
+
+  <!-- 메인 스크립트 로드 -->
+  <script src="app.js"></script>
+</body>
+</html>
